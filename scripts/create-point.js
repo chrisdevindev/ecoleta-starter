@@ -51,6 +51,9 @@ const itemsCollected = document.querySelectorAll(".items-grid li")
         item.addEventListener("click", handleSelectedItem)
     }
 
+
+const collectedItems = document.querySelector("input[name=items]")
+
 let selectedItems = []
 
 function handleSelectedItem(event){
@@ -81,5 +84,7 @@ function handleSelectedItem(event){
         //adicionar a seleção
         selectedItems.push(itemId)
     }
-    console.log(selectedItems)
+
+    collectedItems.value = selectedItems
+
 }
