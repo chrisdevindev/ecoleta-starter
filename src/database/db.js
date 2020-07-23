@@ -1,0 +1,61 @@
+//importando a dependência do sqlite3 e mandando retornar mensangem no terminal com o verbose()
+const sqlite3 = require("sqlite3").verbose()
+
+//criando o objeto que irá fazer operações no banco de dados
+const db = new sqlite3.Database("./src/database/database.db")
+
+//utilizando o objeto de banco de dados para as operações
+db.serialize(() => {
+    //criando uma tabela
+    db.run(`
+        CREATE TABLE IF NOT EXISTS places (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            image TEXT,
+            name TEXT,
+            address TEXT,
+            address2 TEXT,
+            state TEXT,
+            city TEXT,
+            items TEXT
+        )
+    `)
+
+    //inserindo dados na tabela
+    const query =`
+    INSERT INTO places(
+        image,
+        name,
+        address,
+        address2,
+        state,
+        city,
+        items
+    )VALUES (?,?,?,?,?,?,?);
+    `
+
+    const values = [
+        "https://images.unsplash.com/photo-1558119046-bf5375f0a4af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
+        "Lixão de Ocara",
+        "Christian Castro, Sede-Centro",
+        "Número 180",
+        "Ceará",
+        "Ocara",
+        "Resíduos Eletrônicos, Lãmpadas"
+    ]
+
+    function afterInsertData(err){
+        if(err){
+            return console.log(err)
+        }
+
+        console.log("Cadastrado com sucesso!")
+        console.log(this )
+    }
+
+    db.run(query, values, afterInsertData)  
+    //consultando dados na tabela 
+
+    //deletando um dado na tabela
+
+})
+

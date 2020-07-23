@@ -27,7 +27,7 @@ function getCities(event){
     citySelect.innerHTML = "<option value>Selecione a Cidade</option>"
     citySelect.disabled = true
 
-    fetch(url)
+    fetch (url)
     .then( res => res.json())
     .then( cities => {
 
