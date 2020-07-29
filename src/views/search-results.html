@@ -2,103 +2,129 @@
 
 {% set pageId = "page-search-results"%}
 
-    {% block title %}
-        <title>Resultado da pesquisa</title>
-    {% endblock title %}
+{% block title %}
+<title>Resultado da pesquisa</title>
+{% endblock title %}
 
-    {% block styles %}
-        <link rel="stylesheet" href="styles/search-results.css">
-    {% endblock styles %}
+{% block styles %}
+<link rel="stylesheet" href="styles/search-results.css">
+{% endblock styles %}
 
 
-    {% block content %}    
-    
-        {% include "partials/page-header.html" %}
- 
-         <main>
-             <h4>
-                 <strong>2 pontos</strong> encontrados
-             </h4>
- 
-             <div class="cards">
-                 <div class="card">
-                     <img src="https://images.unsplash.com/photo-1587796914694-4b8ef35b6ae8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-                         alt="Colectoria">
-                     <h1>Colectoria</h1>
-                     <h3>Resíduos Eletrônicos, Lâmpadas </h3>
-                     <p>
-                         Ocara, Ceará <br />
-                         Christian Castro, Bairro-Centro <br />
-                         N° 1125
-                     </p>
-                 </div>
-             
- 
-             
-                 <div class="card">
-                     <img src="https://images.unsplash.com/photo-1542739674-b449a8938b59?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
-                         alt="Colectoria">
-                     <h1>Colectoria</h1>
-                     <h3>Resíduos Eletrônicos, Lâmpadas </h3>
-                     <p>
-                         Ocara, Ceará <br />
-                         Christian Castro, Bairro-Centro <br />
-                         N° 1125
-                     </p>
-                 </div>
- 
-                 <div class="card">
-                     <img src="https://images.unsplash.com/photo-1467139840664-96b244a66825?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-                         alt="Colectoria">
-                     <h1>Colectoria</h1>
-                     <h3>Resíduos Eletrônicos, Lâmpadas </h3>
-                     <p>
-                         Ocara, Ceará <br />
-                         Christian Castro, Bairro-Centro <br />
-                         N° 1125
-                     </p>
-                 </div>
- 
-                 <div class="card">
-                     <img src="https://images.unsplash.com/photo-1567177482347-ffe28f8c1929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=958&q=80"
-                         alt="Colectoria">
-                     <h1>Colectoria</h1>
-                     <h3>Resíduos Eletrônicos, Lâmpadas </h3>
-                     <p>
-                         Ocara, Ceará <br />
-                         Christian Castro, Bairro-Centro <br />
-                         N° 1125
-                     </p>
-                 </div>
-             
- 
-             
-                 <div class="card">
-                     <img src="https://images.unsplash.com/photo-1554244597-701651700ad9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-                         alt="Colectoria">
-                     <h1>Colectoria</h1>
-                     <h3>Resíduos Eletrônicos, Lâmpadas </h3>
-                     <p>
-                         Ocara, Ceará <br />
-                         Christian Castro, Bairro-Centro <br />
-                         N° 1125
-                     </p>
-                 </div>
- 
-                 <div class="card">
-                     <img src="https://images.unsplash.com/photo-1558119046-bf5375f0a4af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-                         alt="Colectoria">
-                     <h1>Colectoria</h1>
-                     <h3>Resíduos Eletrônicos, Lâmpadas </h3>
-                     <p>
-                         Ocara, Ceará <br />
-                         Christian Castro, Bairro-Centro <br />
-                         N° 1125
-                     </p>
-                 </div>
-                 
-             </div>
-         </main>
- 
-    {% endblock content %}
+{% block content %}
 
+{% include "partials/page-header.html" %}
+
+<main>
+
+    {% if total > 0 %}
+
+    <h4>
+        <strong>{{total}} pontos</strong> encontrados
+    </h4>
+
+    <div class="cards">
+
+
+        {% for place in places%}
+
+        <div class="card">
+            <img src="{{ place.image }}" alt="{{ place.name }}">
+            <h1>{{ place.name }}</h1>
+            <h3>{{ place.items }}</h3>
+            <p>
+                {{ place.city }}, {{place.state}}
+                <br />
+                {{ place.address }}
+                <br />
+                {{ place.address2 }}
+            </p>
+        </div>
+
+        {% endfor %}
+
+        <!-- <div class="card">
+                    <img src="https://images.unsplash.com/photo-1587796914694-4b8ef35b6ae8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
+                        alt="Colectoria">
+                    <h1>Colectoria</h1>
+                    <h3>Resíduos Eletrônicos, Lâmpadas </h3>
+                    <p>
+                        Ocara, Ceará <br />
+                        Christian Castro, Bairro-Centro <br />
+                        N° 1125
+                    </p>
+                </div>
+            
+
+            
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1542739674-b449a8938b59?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
+                        alt="Colectoria">
+                    <h1>Colectoria</h1>
+                    <h3>Resíduos Eletrônicos, Lâmpadas </h3>
+                    <p>
+                        Ocara, Ceará <br />
+                        Christian Castro, Bairro-Centro <br />
+                        N° 1125
+                    </p>
+                </div>
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1467139840664-96b244a66825?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
+                        alt="Colectoria">
+                    <h1>Colectoria</h1>
+                    <h3>Resíduos Eletrônicos, Lâmpadas </h3>
+                    <p>
+                        Ocara, Ceará <br />
+                        Christian Castro, Bairro-Centro <br />
+                        N° 1125
+                    </p>
+                </div>
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1567177482347-ffe28f8c1929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=958&q=80"
+                        alt="Colectoria">
+                    <h1>Colectoria</h1>
+                    <h3>Resíduos Eletrônicos, Lâmpadas </h3>
+                    <p>
+                        Ocara, Ceará <br />
+                        Christian Castro, Bairro-Centro <br />
+                        N° 1125
+                    </p>
+                </div>
+            
+
+            
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1554244597-701651700ad9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
+                        alt="Colectoria">
+                    <h1>Colectoria</h1>
+                    <h3>Resíduos Eletrônicos, Lâmpadas </h3>
+                    <p>
+                        Ocara, Ceará <br />
+                        Christian Castro, Bairro-Centro <br />
+                        N° 1125
+                    </p>
+                </div>
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1558119046-bf5375f0a4af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
+                        alt="Colectoria">
+                    <h1>Colectoria</h1>
+                    <h3>Resíduos Eletrônicos, Lâmpadas </h3>
+                    <p>
+                        Ocara, Ceará <br />
+                        Christian Castro, Bairro-Centro <br />
+                        N° 1125
+                    </p>
+                </div> -->
+
+    </div>
+
+    {% else %}
+        <h4><strong>Nenhum</strong> local encontrado</h4>
+
+    {% endif %}
+</main>
+
+{% endblock content %}
