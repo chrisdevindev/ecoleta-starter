@@ -122,9 +122,16 @@
 
 
 {% block modal %}
-    {% if saved %}
-    {% include "partials/point-created.html" %}   
+
+    {% if saved == true %}
+        {% include "partials/point-created.html" %}  
+
+        {% elif saved == false %}
+        {% include "partials/err-page.html" %}  
+
     {% endif %}
+
+
 
 {% endblock modal %}
 
@@ -133,6 +140,5 @@
 <script src="./scripts/create-point.js"></script>
 {% endblock scripts %}
 
-</body>
 
 </html>
